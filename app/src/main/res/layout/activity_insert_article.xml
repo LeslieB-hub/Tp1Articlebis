@@ -22,6 +22,8 @@
     app:layout_constraintTop_toBottomOf="@+id/titre_insertion"
     android:hint="Nom de l'article"
     android:layout_marginTop="50dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
     />
 
     <EditText
@@ -31,6 +33,8 @@
         app:layout_constraintTop_toBottomOf="@+id/et_name_article"
         android:hint="Description de l'article"
         android:layout_marginTop="50dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
         />
     <EditText
         android:id="@+id/et_price_article"
@@ -40,34 +44,50 @@
         android:hint="2.5"
         android:layout_marginTop="50dp"
         android:inputType="numberDecimal"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
         />
     <EditText
         android:id="@+id/et_link_article"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/et_price_article"
-        android:hint="www."
+        android:hint="Site internet"
         android:layout_marginTop="50dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
 
         />
+
+    <RatingBar
+        android:id="@+id/rb_note_article"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/et_link_article"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:isIndicator="true"
+        android:numStars="5"
+        android:hint="NOTE"
+
+        />
+
+
     <Button
         android:id="@+id/btn_save"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Enregistrer"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rb_note_article"
+        android:layout_marginTop="50dp"
         android:onClick="onClickSave"
         />
-    <Button
-        android:id="@+id/btn_return"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Retour"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:onClick="onClickReturn"
-        />
+
 
 
 

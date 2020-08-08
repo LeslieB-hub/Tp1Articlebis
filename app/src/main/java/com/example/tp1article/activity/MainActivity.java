@@ -4,8 +4,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
@@ -33,8 +37,8 @@ public class MainActivity extends AppCompatActivity {
         InterfaceArticleRepository repoArticle = new ArticleBddRepository(this);
         ArticleViewModel vm = ViewModelProviders.of(this).get(ArticleViewModel.class);
 
-        Article article1 = new Article("pain au chocolat", (float) 40.0, "Description",(float) 10, false, "www.google.com");
-        repoArticle.insert(article1);
+/*        Article article1 = new Article("pain au chocolat", (float) 40.0, "Description",(float) 10, false, "www.google.com");
+        repoArticle.insert(article1);*/
 
         LiveData<List<Article>> observateur = vm.getArticles();
 
@@ -58,5 +62,35 @@ public class MainActivity extends AppCompatActivity {
     public void onClickList(View view) {
         Intent intentList = new Intent(this, listeArticleActivity.class);
         startActivity(intentList);
+    }
+
+    //ICI : ON LIE L’ACTION BARRE À L'ACTIVITÉ
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        //on décompresse le xml du menu
+        getMenuInflater().inflate(R.menu.mon_menu, menu);
+        return true;
+    }
+    //ICI : ON DÉFINIT LES ACTIONS DE L’ACTION BARRE
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.action_settings:
+                Toast.makeText(this,"Préférences", Toast.LENGTH_SHORT).show();
+                return true;
+            case R.id.action_recherche:
+                Toast.makeText(this,"Recherche", Toast.LENGTH_SHORT).show();
+                return true;
+            case R.id.action_add_item:
+                Intent intentInsert = new Intent(this, InsertArticleActivity.class);
+                startActivity(intentInsert);
+                return true;
+            case R.id.action_list_item:
+                Intent intentList = new Intent(this, listeArticleActivity.class);
+                startActivity(intentList);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }

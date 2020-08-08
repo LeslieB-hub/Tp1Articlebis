@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.RatingBar;
 import android.widget.Toast;
 
 import com.example.tp1article.R;
@@ -37,7 +38,11 @@ public class InsertArticleActivity extends AppCompatActivity {
         EditText etLink = findViewById(R.id.et_link_article);
         String link = etLink.getText().toString();
 
-        Article articleInsert = new Article(name, price, description, (float) 0,false, link); //id, String name, String description, Float rating, Boolean isBought, String link
+        RatingBar ratingBar = findViewById(R.id.rb_note_article);
+        float rating = ratingBar.getRating();
+
+
+        Article articleInsert = new Article(name, price, description, rating,false, link); //id, String name, String description, Float rating, Boolean isBought, String link
         repoArticle.insert(articleInsert);
 
         Toast.makeText(this, name +" "+ description+ " enregistré", Toast.LENGTH_LONG).show();

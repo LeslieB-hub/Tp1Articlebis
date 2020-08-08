@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -24,6 +25,7 @@ public class ArticleAdapter extends ArrayAdapter<Article> {
     @NonNull
     @Override
     public View getView(int position, @Nullable View newLigne, @NonNull ViewGroup parent) {
+        //récupérer l'article à la position
         Article article = getItem(position);
         //if Pour décompressé le xml une fois
         if (newLigne == null){
@@ -35,14 +37,14 @@ public class ArticleAdapter extends ArrayAdapter<Article> {
         TextView tvName = newLigne.findViewById(R.id.tv_name);
         //android textview bold ds google
         TextView tvDescription = newLigne.findViewById(R.id.tv_description);
-        TextView tvRating = newLigne.findViewById(R.id.tv_rating);
+        RatingBar barRating = newLigne.findViewById(R.id.tv_rating);
         TextView tvPrice = newLigne.findViewById(R.id.tv_price);
 
         tvName.setText(article.getName());
         tvDescription.setText(article.getDescription());
-        String rating = String.valueOf(article.getRating());
+        barRating.setRating(article.getRating());
+
         String price = String.valueOf(article.getPrice());
-        tvRating.setText(rating);
         tvPrice.setText(price + " €");
         // On retourne la ligne
         return newLigne;
