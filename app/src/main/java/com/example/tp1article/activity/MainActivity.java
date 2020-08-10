@@ -37,8 +37,6 @@ public class MainActivity extends AppCompatActivity {
         InterfaceArticleRepository repoArticle = new ArticleBddRepository(this);
         ArticleViewModel vm = ViewModelProviders.of(this).get(ArticleViewModel.class);
 
-/*        Article article1 = new Article("pain au chocolat", (float) 40.0, "Description",(float) 10, false, "www.google.com");
-        repoArticle.insert(article1);*/
 
         LiveData<List<Article>> observateur = vm.getArticles();
 

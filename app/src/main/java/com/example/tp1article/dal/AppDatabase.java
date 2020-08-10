@@ -24,7 +24,7 @@ public abstract class AppDatabase extends RoomDatabase {
 
 
     /**
-     * Permet de fournir une instance de la dao utilisateur aux couches supérieures.
+     * Permet de fournir une instance de la dao article aux couches supérieures.
      */
     public abstract ArticleDao getArticleDao();
 
@@ -34,14 +34,14 @@ public abstract class AppDatabase extends RoomDatabase {
             //On l'a créé
             INSTANCE = Room.databaseBuilder(context, AppDatabase.class, "shop.db")
                     //ajout un callback pr créer ou action ce qu'on veut la créer
-                    //.addCallback(roomFixture)
+                    .addCallback(roomFixture)
                     //.allowMainThreadQueries() permet d'utiliser les asynctacks et nom les livedata donc pas l'architecture component
                     .build();
         }
         return INSTANCE;
     }
 
-/*    private static Callback roomFixture = new Callback() {
+    private static Callback roomFixture = new Callback() {
         @Override
         public void onCreate(@NonNull SupportSQLiteDatabase db) {
             super.onCreate(db);
@@ -51,10 +51,12 @@ public abstract class AppDatabase extends RoomDatabase {
                     ArticleDao dao = INSTANCE.getArticleDao();
                     dao.insert(new Article(0, "Télécommande", 52f, "Elle s'adapte à toute les télévisions", 2.5f, false, "www.telecommande.fr")); //id, String name, Float price, String description, Float rating, Boolean isBought, String link
                     dao.insert(new Article(0, "Verre", 2f, "Elle s'adapte à tout", 5f, false, "www.verre.fr"));
+                    dao.insert(new Article(0,"pain au chocolat", 40.0f, "Description", 3f, true, "www.pain-au-chocolat.fr"));
+                    dao.insert(new Article(0,"pain au nutella", 1.5f, "C'est délicieux", 1f, true, "www.google.com"));
                     return null;
                 }
             }.execute(INSTANCE);
         }
-    }.onCreate(SupportSQLiteDatabase INSTANCE);*/
+    };
 
 }

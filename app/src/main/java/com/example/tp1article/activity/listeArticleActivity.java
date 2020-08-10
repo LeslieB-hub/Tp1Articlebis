@@ -103,7 +103,7 @@ public class listeArticleActivity extends AppCompatActivity {
         final int position = listView.getPositionForView(parentRow);
         Article articleClicked = (Article) maListe.getAdapter().getItem(position);
         Log.i("Shop", "fonctionne"+ articleClicked);
-        Toast.makeText(listeArticleActivity.this, " "+articleClicked, Toast.LENGTH_LONG).show();
+        Toast.makeText(listeArticleActivity.this, "L'article '"+articleClicked.getName()+"' a été supprimé.", Toast.LENGTH_LONG).show();
         repoArticle.delete(articleClicked);
         finish();
 
@@ -114,6 +114,11 @@ public class listeArticleActivity extends AppCompatActivity {
         ListView listView = (ListView) parentRow.getParent();
         final int position = listView.getPositionForView(parentRow);
         Article articleClicked = (Article) maListe.getAdapter().getItem(position);
+        Intent intentModify = new Intent(listeArticleActivity.this, ModifyArticleActivity.class);
+        intentModify.putExtra("articleClicked", articleClicked);
+        startActivity(intentModify);
 
     }
+
+
 }

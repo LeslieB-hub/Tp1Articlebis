@@ -1,5 +1,8 @@
 package com.example.tp1article.bo;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
@@ -7,7 +10,7 @@ import androidx.room.PrimaryKey;
  * Classe représentant un article
  */
 @Entity
-public class Article {
+public class Article implements Parcelable {
     @PrimaryKey(autoGenerate = true)
     private int id;
     private String name;
@@ -37,6 +40,37 @@ public class Article {
 
     public Article() {
     }
+
+    protected Article(Parcel in) {
+        id = in.readInt();
+        name = in.readString();
+        if (in.readByte() == 0) {
+            price = null;
+        } else {
+            price = in.readFloat();
+        }
+        if (in.readByte() == 0) {
+            rating = null;
+        } else {
+            rating = in.readFloat();
+        }
+        description = in.readString();
+        byte tmpIsBought = in.readByte();
+        isBought = tmpIsBought == 0 ? null : tmpIsBought == 1;
+        link = in.readString();
+    }
+
+    public static final Creator<Article> CREATOR = new Creator<Article>() {
+        @Override
+        public Article createFromParcel(Parcel in) {
+            return new Article(in);
+        }
+
+        @Override
+        public Article[] newArray(int size) {
+            return new Article[size];
+        }
+    };
 
     public int getId() {
         return id;
@@ -105,5 +139,31 @@ public class Article {
                 ", isBought=" + isBought +
                 ", link='" + link + '\'' +
                 '}';
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeInt(id);
+        parcel.writeString(name);
+        if (price == null) {
+            parcel.writeByte((byte) 0);
+        } else {
+            parcel.writeByte((byte) 1);
+            parcel.writeFloat(price);
+        }
+        if (rating == null) {
+            parcel.writeByte((byte) 0);
+        } else {
+            parcel.writeByte((byte) 1);
+            parcel.writeFloat(rating);
+        }
+        parcel.writeString(description);
+        parcel.writeByte((byte) (isBought == null ? 0 : isBought ? 1 : 2));
+        parcel.writeString(link);
     }
 }

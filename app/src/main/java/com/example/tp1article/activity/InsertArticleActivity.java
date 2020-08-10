@@ -38,11 +38,7 @@ public class InsertArticleActivity extends AppCompatActivity {
         EditText etLink = findViewById(R.id.et_link_article);
         String link = etLink.getText().toString();
 
-        RatingBar ratingBar = findViewById(R.id.rb_note_article);
-        float rating = ratingBar.getRating();
-
-
-        Article articleInsert = new Article(name, price, description, rating,false, link); //id, String name, String description, Float rating, Boolean isBought, String link
+        Article articleInsert = new Article(name, price, description, 0f,false, link); //id, String name, String description, Float rating, Boolean isBought, String link
         repoArticle.insert(articleInsert);
 
         Toast.makeText(this, name +" "+ description+ " enregistré", Toast.LENGTH_LONG).show();
